@@ -38,7 +38,7 @@ namespace ChangeInput.Core
             }
             return default;
         }
-        public ExecutionType Help(MenuCommand menuCommand, out string output)
+        private ExecutionType Help(MenuCommand menuCommand, out string output)
         {
             if (menuCommand.Arguments.Any())
             {
@@ -60,7 +60,7 @@ namespace ChangeInput.Core
             output = helpMessage.ToString();
             return ExecutionType.Output;
         }
-        public ExecutionType OutputMonitorDetails(MenuCommand menuCommand, out string output)
+        private ExecutionType OutputMonitorDetails(MenuCommand menuCommand, out string output)
         {
             if (menuCommand.Arguments.Any())
             {
@@ -70,7 +70,7 @@ namespace ChangeInput.Core
             output = $"{string.Join("\n", MonitorInteraction.GetMonitorDetails())}\n";
             return ExecutionType.Output;
         }
-        public ExecutionType SetMonitorInput(MenuCommand menuCommand, out string output)
+        private ExecutionType SetMonitorInput(MenuCommand menuCommand, out string output)
         {
             switch(menuCommand.Arguments.Count())
             {
