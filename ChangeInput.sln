@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeInput", "ChangeInput\ChangeInput.csproj", "{72DC176C-BBF0-4890-82F3-86EDDD46953E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeInput.Core", "ChangeInput.Core\ChangeInput.Core.csproj", "{8FC1991A-C5D5-4F07-8F91-1432DC8894DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{72DC176C-BBF0-4890-82F3-86EDDD46953E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72DC176C-BBF0-4890-82F3-86EDDD46953E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72DC176C-BBF0-4890-82F3-86EDDD46953E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC1991A-C5D5-4F07-8F91-1432DC8894DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC1991A-C5D5-4F07-8F91-1432DC8894DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC1991A-C5D5-4F07-8F91-1432DC8894DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC1991A-C5D5-4F07-8F91-1432DC8894DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
