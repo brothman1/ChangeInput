@@ -366,6 +366,7 @@ namespace ChangeInput.Core
         }
         #endregion
         #endregion
+        #region GetMonitorDetails
         public static IEnumerable<string> GetMonitorDetails()
         {
             return _displayMonitorCollection
@@ -377,8 +378,46 @@ namespace ChangeInput.Core
             StringBuilder monitorDetails = new StringBuilder();
             monitorDetails.Append($"Monitor Name: {displayMonitor.Name}\n");
             monitorDetails.Append($"Current Input: {_inputSelectOptions[monitor.CurrentInput]}\n");
-            monitorDetails.Append($"Possible Inputs: {string.Join(",", monitor.PossibleInputs.Select(input => _inputSelectOptions[input]))}\n");
+            monitorDetails.Append($"Possible Inputs: {string.Join(",", monitor.PossibleInputs.Select(input => $"{input} : {_inputSelectOptions[input]}"))}\n");
             return monitorDetails.ToString();
         }
+        #endregion
+        #region SetMonitorInput
+        public static bool SetMonitorInput(string newInput)
+        {
+            bool result = true;
+            foreach (DisplayMonitor displayMonitor in _displayMonitorCollection)
+            {
+                foreach(Monitor monitor in displayMonitor.MonitorCollection)
+                {
+                    if (!SetVCPFeature(monitor.PhysicalMonitorHandle, _inputSelectVcpCode, (uint)Convert.ToInt32(newInput, 16)))
+                    {
+                        result = false;
+                    }
+                }
+            }
+            return result;
+        }
+        public static bool SetMonitorInput(string name, string newInput)
+        {
+            bool result = true;
+            DisplayMonitor displayMonitor = _displayMonitorCollection.SingleOrDefault(monitor => monitor.Name == name);
+            if (displayMonitor == default)
+            {
+                result = false;
+            }
+            else
+            {
+                foreach (Monitor monitor in displayMonitor.MonitorCollection)
+                {
+                    if (!SetVCPFeature(monitor.PhysicalMonitorHandle, _inputSelectVcpCode, (uint)Convert.ToInt32(newInput, 16)))
+                    {
+                        result = false;
+                    }
+                }
+            }
+            return result;
+        }
+        #endregion
     }
 }

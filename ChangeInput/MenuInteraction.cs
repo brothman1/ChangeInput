@@ -63,7 +63,7 @@ namespace ChangeInput
                 string userResponse = RequestUserResponse(requestMessage, printRequests);
                 if (!TryParseCommands<TEnum>(userResponse, out menuCommands, excludedValues) || menuCommands.Count > 1)
                 {
-                    Write($"\"{userResponse}\" is invalid! For available commands try \"/Help\"\n\n");
+                    Write($"\"{userResponse}\" is invalid! For available commands and their syntax try \"/Help\"\n\n");
                 }
             }
             return menuCommands;
@@ -109,7 +109,7 @@ namespace ChangeInput
                 string[] menuCommandArguments = _splitCommandPattern.Split(menuCommand);
                 if (menuCommandArguments[0].TryParseEnumExact(out TEnum parsedEnum, excludedValues))
                 {
-                    menuCommands.Add(new MenuCommand(parsedEnum, menuCommandArguments.Skip(1).ToArray()));
+                    menuCommands.Add(new MenuCommand(parsedEnum, menuCommandArguments.Skip(1).Select(command => command.Replace("\"","")).ToArray()));
                 }
             }
             return menuCommands.Any();

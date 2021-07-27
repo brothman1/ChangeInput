@@ -42,7 +42,7 @@ namespace ChangeInput.Core
         {
             if (menuCommand.Arguments.Any())
             {
-                output = "Command must be passed with appropriate arguments! For available commands try \"/Help\"\n\n";
+                output = "Command must be passed with appropriate arguments! For available commands and their syntax try \"/Help\"\n\n";
                 return ExecutionType.Output;
             }
             StringBuilder helpMessage = new StringBuilder();
@@ -64,7 +64,7 @@ namespace ChangeInput.Core
         {
             if (menuCommand.Arguments.Any())
             {
-                output = "Command must be passed with appropriate arguments! For available commands try \"/Help\"\n\n";
+                output = "Command must be passed with appropriate arguments! For available commands and their syntax try \"/Help\"\n\n";
                 return ExecutionType.Output;
             }
             output = $"{string.Join("\n", MonitorInteraction.GetMonitorDetails())}\n";
@@ -72,7 +72,39 @@ namespace ChangeInput.Core
         }
         public ExecutionType SetMonitorInput(MenuCommand menuCommand, out string output)
         {
-            output = "blah";
+            switch(menuCommand.Arguments.Count())
+            {
+                case 1:
+                    return SetAllMonitorInput(menuCommand.Arguments[0], out output);
+                case 2:
+                    return SetOneMonitorInput(menuCommand.Arguments[0], menuCommand.Arguments[1], out output);
+                default:
+                    output = "Command must be passed with appropriate arguments! For available commands and their syntax try \"/Help\"\n\n";
+                    return ExecutionType.Output;
+            }
+        }
+        private ExecutionType SetAllMonitorInput(string newInput, out string output)
+        {
+            if (MonitorInteraction.SetMonitorInput(newInput))
+            {
+                output = $"All monitors changed to \"{newInput}\" successfully.\n\n";
+            }
+            else
+            {
+                output = $"Unable to change all monitors to \"{newInput}\"!\n\n";
+            }
+            return ExecutionType.Output;
+        }
+        private ExecutionType SetOneMonitorInput(string name, string newInput, out string output)
+        {
+            if (MonitorInteraction.SetMonitorInput(name, newInput))
+            {
+                output = $"\"{name}\" changed to \"{newInput}\" successfully.\n\n";
+            }
+            else
+            {
+                output = $"Unable to change \"{name}\" to {newInput}!\n\n";
+            }
             return ExecutionType.Output;
         }
     }
